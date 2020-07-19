@@ -1,29 +1,24 @@
-use std::io;
+mod user_input_controller;
+mod tasks;
+
 
 fn main() {
     let mut user_input: String = String::new();
 
-    println!("#### FACTORIAL FINDER ####\n");
+    println!("#### BEGINNER_1 ####\n");
 
     loop {
         user_input.clear();
-        println!("C to cancel");
-        println!("Enter a number:");
-        io::stdin().read_line(&mut user_input).expect("Failed reading line!");
+        println!("The following tasks are available:");
+        println!("1) finding the factorial");
+        println!("2) test something");
 
-        if user_input.trim_end() == "C" || user_input.trim_end() == "c" {
-            break;
+        let task_to_execute: i32 = user_input_controller::get_integer_answer("Execute Task: ").unwrap();
+
+        match task_to_execute {
+            1 => tasks::find_factorial(),
+            2 => tasks::testing(),
+            _ => {}
         }
-        let number: i32 = user_input.trim_end().parse().expect("Failed to parse integer!");
-        println!("{}! is {}\n", number, find_factorial(number));
     }
-}
-
-fn find_factorial(number: i32) -> i32 {
-    let mut factorial: i32 = 1;
-    for f in 1..number+1 {
-        factorial *= f;
-    }
-
-    return factorial;
 }
