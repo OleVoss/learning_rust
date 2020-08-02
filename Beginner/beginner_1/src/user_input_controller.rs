@@ -19,6 +19,6 @@ pub fn get_integer_answer(question: &str) -> Result<i32, &'static str> {
     io::stdin().read_line(&mut user_input).expect("Failed reading line!");
     match user_input.trim().parse::<i32>() {
         Ok(number) => Ok(number),
-        Err(_error) => Err("Failed to read parse i32")
+        Err(_error) => Err("Failed to parse i32")
     }
 }

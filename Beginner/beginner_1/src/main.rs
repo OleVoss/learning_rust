@@ -13,7 +13,12 @@ fn main() {
         println!("1) finding the factorial");
         println!("2) test something");
 
-        let task_to_execute: i32 = user_input_controller::get_integer_answer("Execute Task: ").unwrap();
+        let task_to_execute: i32 = loop {
+            match user_input_controller::get_integer_answer("Execute Task: ") {
+                Ok(t) => break t,
+                Err(e) => println!("{}", e),
+            }
+        };
 
         match task_to_execute {
             1 => tasks::find_factorial(),
